@@ -24,6 +24,6 @@ public @interface UniqueValue {
 
 	String domainAttribute();
 
-	Class<Usuario> klass();
+	Class<?> klass();
 
 }

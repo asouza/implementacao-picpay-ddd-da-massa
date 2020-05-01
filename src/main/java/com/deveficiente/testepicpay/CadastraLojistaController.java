@@ -17,7 +17,7 @@ public class CadastraLojistaController {
 	@PostMapping(value = "/lojistas")
 	@Transactional
 	public void execute(@Valid NovoLojistaForm form) {
-		System.out.println(form);
+		manager.persist(form.toModel(manager :: find));
 	}
 
 }

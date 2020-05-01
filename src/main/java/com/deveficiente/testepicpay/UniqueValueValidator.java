@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidatorContext;
 public class UniqueValueValidator implements ConstraintValidator<UniqueValue, String>{
 	
 	private String domainAttribute;
-	private Class<Usuario> klass;
+	private Class<?> klass;
 	@PersistenceContext
 	private EntityManager manager;
 

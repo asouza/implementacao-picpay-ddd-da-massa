@@ -22,6 +22,11 @@ public class Usuario {
 	private @NotBlank @Email String email;
 	private @NotBlank String senha;
 	
+	@Deprecated
+	public Usuario() {
+
+	}
+	
 	/**
 	 * 
 	 * @param nomeCompleto

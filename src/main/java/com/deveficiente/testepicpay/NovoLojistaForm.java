@@ -1,5 +1,7 @@
 package com.deveficiente.testepicpay;
 
+import java.util.function.BiFunction;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -17,7 +19,7 @@ public class NovoLojistaForm {
 	// deveria ser unico?
 	private String cnpj;
 	@NotBlank
-	// @UniqueValue(domainAttribute = "username",)
+	@UniqueValue(domainAttribute = "username",klass = UserName.class)
 	private String username;
 	@NotNull
 	@ExistsId(domainAttribute = "id", klass = Usuario.class)
@@ -37,6 +39,11 @@ public class NovoLojistaForm {
 	public String toString() {
 		return "NovoLojistaForm [razaoSocial=" + razaoSocial + ", nomeFantasia=" + nomeFantasia + ", cnpj=" + cnpj
 				+ ", username=" + username + ", usuarioId=" + usuarioId + "]";
+	}
+
+	public Lojista toModel(BiFunction<Class, Long, Object> finderById) {
+		Usuario usuario = (Usuario) finderById.apply(Usuario.class, usuarioId);
+		return new Lojista(razaoSocial,nomeFantasia,cnpj,new UserName(username),usuario);
 	}
 
 }
