@@ -5,20 +5,19 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CadastraUsuarioController {
-	
-	@PersistenceContext
-	private EntityManager manager;	
+public class CadastraLojistaController {
 
-	@PostMapping(value = "/usuarios")
+	@PersistenceContext
+	private EntityManager manager;
+
+	@PostMapping(value = "/lojistas")
 	@Transactional
-	public void execute(@Valid NovoUsuarioForm form) {		
-		manager.persist(form.toModel());
+	public void execute(@Valid NovoLojistaForm form) {
+		System.out.println(form);
 	}
 
 }
