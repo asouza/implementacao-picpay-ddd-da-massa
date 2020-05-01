@@ -10,11 +10,13 @@ public class NovoUsuarioForm {
 	@NotBlank
 	private String nomeCompleto;
 	@CPF
+	@UniqueValue(domainAttribute="cpf",klass=Usuario.class)
 	private String cpf;
 	@NotBlank
 	private String numeroTelefone;
 	@NotBlank
 	@Email
+	@UniqueValue(domainAttribute="email",klass=Usuario.class)
 	private String email;
 	@NotBlank
 	private String senha;
@@ -33,6 +35,10 @@ public class NovoUsuarioForm {
 	public String toString() {
 		return "NovoUsuarioForm [nomeCompleto=" + nomeCompleto + ", cpf=" + cpf + ", numeroTelefone=" + numeroTelefone
 				+ ", email=" + email + ", senha=" + senha + "]";
+	}
+
+	public Usuario toModel() {
+		return new Usuario(nomeCompleto,cpf,numeroTelefone,email,new SenhaLimpa(senha));
 	}
 
 }
