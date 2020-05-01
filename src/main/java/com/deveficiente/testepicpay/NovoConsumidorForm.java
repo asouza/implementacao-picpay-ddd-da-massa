@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class NovoConsumidorForm {
 
 	@NotBlank
-	@UniqueValue(domainAttribute = "username", klass = UserName.class)
+	@UniqueValue(domainAttribute = "username", klass = Dono.class)
 	private String username;
 	@NotNull
 	@ExistsId(domainAttribute = "id", klass = Usuario.class)
@@ -23,7 +23,7 @@ public class NovoConsumidorForm {
 
 	public Consumidor toModel(BiFunction<Class<?>, Long, Object> finderById) {
 		Usuario usuario = (Usuario) finderById.apply(Usuario.class, usuarioId);		
-		return new Consumidor(new UserName(username),usuario);
+		return new Consumidor(username,usuario);
 	}
 
 }

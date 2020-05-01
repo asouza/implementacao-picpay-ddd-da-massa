@@ -19,7 +19,7 @@ public class NovoLojistaForm {
 	// deveria ser unico?
 	private String cnpj;
 	@NotBlank
-	@UniqueValue(domainAttribute = "username",klass = UserName.class)
+	@UniqueValue(domainAttribute = "username",klass = Dono.class)
 	private String username;
 	@NotNull
 	@ExistsId(domainAttribute = "id", klass = Usuario.class)
@@ -44,7 +44,7 @@ public class NovoLojistaForm {
 
 	public Lojista toModel(BiFunction<Class, Long, Object> finderById) {
 		Usuario usuario = (Usuario) finderById.apply(Usuario.class, usuarioId);
-		return new Lojista(razaoSocial,nomeFantasia,cnpj,new UserName(username),usuario);
+		return new Lojista(razaoSocial,nomeFantasia,cnpj,username,usuario);
 	}
 
 }
