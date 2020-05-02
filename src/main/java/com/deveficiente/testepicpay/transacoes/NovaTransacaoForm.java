@@ -1,10 +1,12 @@
-package com.deveficiente.testepicpay;
+package com.deveficiente.testepicpay.transacoes;
 
 import java.math.BigDecimal;
 import java.util.function.Function;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+
+import com.deveficiente.testepicpay.cadastracontas.Dono;
 
 public class NovaTransacaoForm {
 

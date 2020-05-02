@@ -1,4 +1,4 @@
-package com.deveficiente.testepicpay;
+package com.deveficiente.testepicpay.cadastracontas;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

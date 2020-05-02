@@ -1,4 +1,4 @@
-package com.deveficiente.testepicpay;
+package com.deveficiente.testepicpay.cadastracontas;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

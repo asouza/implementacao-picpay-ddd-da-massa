@@ -1,4 +1,4 @@
-package com.deveficiente.testepicpay;
+package com.deveficiente.testepicpay.transacoes;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

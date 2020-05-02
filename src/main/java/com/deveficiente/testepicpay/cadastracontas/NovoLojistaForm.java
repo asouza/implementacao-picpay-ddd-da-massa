@@ -1,4 +1,4 @@
-package com.deveficiente.testepicpay;
+package com.deveficiente.testepicpay.cadastracontas;
 
 import java.util.function.BiFunction;
 

@@ -1,4 +1,4 @@
-package com.deveficiente.testepicpay;
+package com.deveficiente.testepicpay.transacoes;
 
 import java.util.Optional;
 
@@ -13,6 +13,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.deveficiente.testepicpay.cadastracontas.Dono;
 
 @RestController
 public class ExecutaTransacaoEntreContasController {

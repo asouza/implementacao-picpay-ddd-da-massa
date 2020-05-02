@@ -1,4 +1,7 @@
-package com.deveficiente.testepicpay;
+package com.deveficiente.testepicpay.listacontas;
+
+import com.deveficiente.testepicpay.cadastracontas.Dono;
+import com.deveficiente.testepicpay.cadastracontas.Usuario;
 
 public class UsuarioItemListaDTO {
 

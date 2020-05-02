@@ -1,24 +1,24 @@
-package com.deveficiente.testepicpay;
+package com.deveficiente.testepicpay.cadastracontas;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CadastraConsumidorController {
+public class CadastraUsuarioController {
 	
 	@PersistenceContext
-	private EntityManager manager;
+	private EntityManager manager;	
 
-	@PostMapping(value = "/consumidores")
+	@PostMapping(value = "/usuarios")
 	@Transactional
-	public void execute(@Valid NovoConsumidorForm form) {
-		manager.persist(form.toModel(manager :: find));
+	public void execute(@Valid NovoUsuarioForm form) {		
+		manager.persist(form.toModel());
 	}
 
 }
