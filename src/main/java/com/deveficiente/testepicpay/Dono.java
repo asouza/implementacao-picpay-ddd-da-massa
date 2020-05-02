@@ -18,6 +18,11 @@ public class Dono {
 	@NotNull
 	@ManyToOne
 	private Usuario usuario;
+	
+	@Deprecated
+	public Dono() {
+
+	}
 
 	public Dono(@NotBlank String username,@NotNull Usuario usuario) {
 		this.username = username;
