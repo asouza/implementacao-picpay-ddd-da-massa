@@ -22,14 +22,14 @@ public class Lojista {
 	private @CNPJ @NotBlank String cnpj;
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@NotNull
-	private Dono owner;
+	private Dono dono;
 
 	public Lojista(@NotBlank String razaoSocial, @NotBlank String nomeFantasia, @CNPJ @NotBlank String cnpj,
 			@NotBlank String username, Usuario usuario) {
 				this.razaoSocial = razaoSocial;
 				this.nomeFantasia = nomeFantasia;
 				this.cnpj = cnpj;
-				this.owner = new Dono(username,usuario);
+				this.dono = new Dono(username,usuario);
 	}
 
 }

@@ -23,7 +23,7 @@ public class NovoLojistaForm {
 	private String username;
 	@NotNull
 	@ExistsId(domainAttribute = "id", klass = Usuario.class)
-	@UniqueValue(domainAttribute = "usuario.id",klass = Lojista.class)
+	@UniqueValue(domainAttribute = "dono.usuario.id",klass = Lojista.class)
 	private Long usuarioId;
 
 	public NovoLojistaForm(@NotBlank String razaoSocial, @NotBlank String nomeFantasia, @CNPJ @NotBlank String cnpj,

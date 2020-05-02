@@ -24,4 +24,8 @@ public class Dono {
 		this.usuario = usuario;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
 }

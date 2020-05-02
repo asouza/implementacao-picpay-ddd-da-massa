@@ -12,7 +12,7 @@ public class NovoConsumidorForm {
 	private String username;
 	@NotNull
 	@ExistsId(domainAttribute = "id", klass = Usuario.class)
-	@UniqueValue(domainAttribute = "usuario.id",klass = Consumidor.class)
+	@UniqueValue(domainAttribute = "dono.usuario.id",klass = Consumidor.class)
 	private Long usuarioId;
 
 	public NovoConsumidorForm(@NotBlank String username, @NotNull Long usuarioId) {

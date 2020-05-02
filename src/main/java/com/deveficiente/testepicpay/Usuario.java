@@ -43,4 +43,12 @@ public class Usuario {
 				this.email = email;
 				this.senha = senhaLimpa.hash();
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getNomeCompleto() {
+		return nomeCompleto;
+	}
 }
