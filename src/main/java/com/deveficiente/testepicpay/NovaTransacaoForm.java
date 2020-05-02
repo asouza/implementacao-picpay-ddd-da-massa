@@ -29,5 +29,9 @@ public class NovaTransacaoForm {
 		return new Transacao(donoOrigem,donoDestino,valor);
 	}
 
+	public boolean temMesmaOrigemEDestino() {
+		return donoOrigemId.equals(donoDestinoId);
+	}
+
 
 }

@@ -9,6 +9,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +22,11 @@ public class ExecutaTransacaoEntreContasController {
 	@Autowired
 	private EntityManager manager;
 	
+	@InitBinder
+	public void init(WebDataBinder binder) {
+		binder.addValidators(new TransacaoNaoPodeTerMesmaOrigemEDestinoValidator());
+	}
+	
 	@PostMapping(value = "/transacoes")
 	@Transactional
 	public ResponseEntity<?> execute(@Valid NovaTransacaoForm form) {
@@ -29,8 +36,8 @@ public class ExecutaTransacaoEntreContasController {
 			return response;
 		}
 		
-		Transacao model = form.toModel(id -> manager.find(Dono.class, id));
-		manager.persist(model);
+		Transacao novaTransacao = form.toModel(id -> manager.find(Dono.class, id));
+		manager.persist(novaTransacao);
 		return ResponseEntity.ok().build();
 		
 	}
