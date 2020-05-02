@@ -9,12 +9,12 @@ import javax.validation.constraints.Positive;
 public class NovaTransacaoForm {
 
 	@NotNull
-	private Long donoOrigemId;
+	public final Long donoOrigemId;
 	@NotNull
-	private Long donoDestinoId;
+	public final Long donoDestinoId;
 	@NotNull
 	@Positive
-	private BigDecimal valor;
+	public final BigDecimal valor;
 
 	public NovaTransacaoForm(@NotNull Long donoOrigemId, @NotNull Long donoDestinoId, @NotNull @Positive BigDecimal valor) {
 		super();
@@ -29,8 +29,5 @@ public class NovaTransacaoForm {
 		return new Transacao(donoOrigem,donoDestino,valor);
 	}
 
-	public boolean aceita(BigDecimal outroValor) {
-		return valor.compareTo(outroValor) > 0 ;
-	}
 
 }

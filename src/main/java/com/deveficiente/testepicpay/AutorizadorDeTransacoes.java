@@ -6,19 +6,30 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@Service
-public class AutorizadorDeTransacoes {
+import feign.FeignException;
+
+@FeignClient(url = "http://localhost:8081", name = "autorizador")
+public interface AutorizadorDeTransacoes {
+
+	@GetMapping("/autoriza")
+	ResponseEntity<?> _autoriza(@RequestParam("donoOrigemId") Long donoOrigemId, @RequestParam("donoDestinoId") Long donoDestinoId, @RequestParam("valor") BigDecimal valor);
 	
-	@Autowired
-	private DonoRepository donoRepository;	
-	
-	public Optional<Transacao> autoriza(@Valid NovaTransacaoForm form) {
-		if(form.aceita(new BigDecimal(100))) {
-			return Optional.empty();
+	default ResponseEntity<?> autoriza(@RequestParam("donoOrigemId") Long donoOrigemId, @RequestParam("donoDestinoId") Long donoDestinoId, @RequestParam("valor") BigDecimal valor){
+		try {
+			return this._autoriza(donoOrigemId, donoDestinoId, valor);
+		} catch (FeignException e) {
+			if(e.status() == 401) {
+				return ResponseEntity.status(401).build();
+			}			
+			throw e;
 		}
-		return Optional.of(form.toModel(donoRepository :: getOne));
+		
 	}
 
 }
