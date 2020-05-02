@@ -3,7 +3,6 @@ package com.deveficiente.testepicpay.transacoes;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +22,15 @@ public class ExecutaTransacaoEntreContasController {
 	private AutorizadorDeTransacoes autorizadorDeTransacoes;
 	@Autowired
 	private EntityManager manager;
+	@Autowired
+	private InTransaction inTransaction;
 	
 	@InitBinder
 	public void init(WebDataBinder binder) {
 		binder.addValidators(new TransacaoNaoPodeTerMesmaOrigemEDestinoValidator());
 	}
 	
-	@PostMapping(value = "/transacoes")
-	@Transactional
+	@PostMapping(value = "/transacoes")	
 	public ResponseEntity<?> execute(@Valid NovaTransacaoForm form) {
 		ResponseEntity<?> response = autorizadorDeTransacoes.autoriza(form.donoOrigemId,form.donoDestinoId,form.valor);
 		
@@ -38,9 +38,11 @@ public class ExecutaTransacaoEntreContasController {
 			return response;
 		}
 		
-		Transacao novaTransacao = form.toModel(id -> manager.find(Dono.class, id));
-		manager.persist(novaTransacao);
-		return ResponseEntity.ok().build();
+		return inTransaction.execute(() -> {
+			Transacao novaTransacao = form.toModel(id -> manager.find(Dono.class, id));
+			manager.persist(novaTransacao);
+			return ResponseEntity.ok().build();			
+		});
 		
 	}
 
