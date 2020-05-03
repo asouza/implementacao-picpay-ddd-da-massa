@@ -7,12 +7,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 import com.deveficiente.testepicpay.cadastracontas.Dono;
+import com.deveficiente.testepicpay.cadastracontas.ExistsId;
 
 public class NovaTransacaoForm {
 
 	@NotNull
+	@ExistsId(domainAttribute = "id",klass = Dono.class)
 	private final Long donoOrigemId;
 	@NotNull
+	@ExistsId(domainAttribute = "id",klass = Dono.class)
 	private final Long donoDestinoId;
 	@NotNull
 	@Positive

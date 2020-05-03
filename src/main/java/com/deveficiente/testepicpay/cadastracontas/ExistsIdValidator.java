@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidatorContext;
 public class ExistsIdValidator implements ConstraintValidator<ExistsId, Long>{
 
 	private String domainAttribute;
-	private Class<Usuario> klass;
+	private Class<?> klass;
 	@PersistenceContext
 	private EntityManager manager;
 

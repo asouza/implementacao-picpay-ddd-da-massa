@@ -24,5 +24,5 @@ public @interface ExistsId {
 
 	String domainAttribute();
 
-	Class<Usuario> klass();
+	Class<?> klass();
 }
