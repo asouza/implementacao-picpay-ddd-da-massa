@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -30,11 +29,7 @@ public class ExecutaTransacaoEntreContasController {
 	
 	@PostMapping(value = "/transacoes")	
 	public ResponseEntity<?> execute(@Valid NovaTransacaoForm form) {
-		ResponseEntity<?> response = autorizadorDeTransacoes.autoriza(form);
-		
-		if(response.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
-			return response;
-		}
+		autorizadorDeTransacoes.autoriza(form);
 		
 		return inTransaction.execute(() -> {
 			Transacao novaTransacao = form.toModel(id -> manager.find(Dono.class, id));
