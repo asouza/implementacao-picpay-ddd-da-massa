@@ -1,16 +1,9 @@
 package com.deveficiente.testepicpay.transacoes;
 
-import java.math.BigDecimal;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import feign.FeignException;
 
@@ -18,11 +11,11 @@ import feign.FeignException;
 public interface AutorizadorDeTransacoes {
 
 	@GetMapping("/autoriza")
-	ResponseEntity<?> _autoriza(@RequestParam("donoOrigemId") Long donoOrigemId, @RequestParam("donoDestinoId") Long donoDestinoId, @RequestParam("valor") BigDecimal valor);
+	ResponseEntity<?> _autoriza(@SpringQueryMap NovaTransacaoForm form);
 	
-	default ResponseEntity<?> autoriza(@RequestParam("donoOrigemId") Long donoOrigemId, @RequestParam("donoDestinoId") Long donoDestinoId, @RequestParam("valor") BigDecimal valor){
+	default ResponseEntity<?> autoriza(NovaTransacaoForm form){
 		try {
-			return this._autoriza(donoOrigemId, donoDestinoId, valor);
+			return this._autoriza(form);
 		} catch (FeignException e) {
 			if(e.status() == 401) {
 				return ResponseEntity.status(401).build();

@@ -1,7 +1,5 @@
 package com.deveficiente.testepicpay.transacoes;
 
-import java.util.Optional;
-
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
@@ -32,7 +30,7 @@ public class ExecutaTransacaoEntreContasController {
 	
 	@PostMapping(value = "/transacoes")	
 	public ResponseEntity<?> execute(@Valid NovaTransacaoForm form) {
-		ResponseEntity<?> response = autorizadorDeTransacoes.autoriza(form.donoOrigemId,form.donoDestinoId,form.valor);
+		ResponseEntity<?> response = autorizadorDeTransacoes.autoriza(form);
 		
 		if(response.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
 			return response;

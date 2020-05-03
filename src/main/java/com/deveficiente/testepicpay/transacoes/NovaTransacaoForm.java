@@ -11,12 +11,12 @@ import com.deveficiente.testepicpay.cadastracontas.Dono;
 public class NovaTransacaoForm {
 
 	@NotNull
-	public final Long donoOrigemId;
+	private final Long donoOrigemId;
 	@NotNull
-	public final Long donoDestinoId;
+	private final Long donoDestinoId;
 	@NotNull
 	@Positive
-	public final BigDecimal valor;
+	private final BigDecimal valor;
 
 	public NovaTransacaoForm(@NotNull Long donoOrigemId, @NotNull Long donoDestinoId, @NotNull @Positive BigDecimal valor) {
 		super();
